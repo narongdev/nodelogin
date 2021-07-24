@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+</head>
+<body>
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Login</h1>
+                <form id="frmLogin" action="/" method="POST">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" 
+                        value="<%= (locals.old_data) ? old_data.username:'' %>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Password</label>
+                        <input type="password" class="form-control" name="password" required>
+                    </div>
+                    <% if(locals.login_errors){
+                        login_errors.forEach(function(error_msg){
+                    %>
+                        <div class="alert alert-danger" role="alert"><%= error_msg %></div>
+                    <%
+                        })
+                    } %>
+                    <button class="btn btn-success mt-3" type="submit">Login</button>
+                </form>
+        
+            </div>
+            <div class="col-md-6">
+                <h1>Register</h1>
+                <form id="frmRegis" action="/register" method="POST" novalidate>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="r_username" 
+                        value="<%= (locals.old_data) ? old_data.r_username:'' %>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Password</label>
+                        <input type="password" class="form-control" name="r_password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="r_email" 
+                        value="<%= (locals.old_data) ? old_data.r_email:'' %>" required>
+                    </div>
+                    <% if(locals.register_error){
+                        register_error.forEach(function(error_msg){
+                    %>
+                        <div class="alert alert-danger" role="alert"><%= error_msg %></div>
+                    <%
+                        })
+                    } %>
+                    <button class="btn btn-success mt-3" type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
